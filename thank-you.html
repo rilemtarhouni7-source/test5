@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Confirmed!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 600px;
+            width: 100%;
+            padding: 50px 40px;
+            text-align: center;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            animation: scaleIn 0.5s ease;
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0); }
+            to { transform: scale(1); }
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 40px;
+        }
+
+        .info-box {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .info-box h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .info-box p {
+            margin: 10px 0;
+            color: #555;
+        }
+
+        .whatsapp-btn {
+            background: #25D366;
+            color: white;
+            padding: 20px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 1.2rem;
+            font-weight: 700;
+            transition: all 0.3s;
+            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
+            margin-top: 30px;
+        }
+
+        .whatsapp-btn:hover {
+            background: #20BA5A;
+            transform: translateY(-3px);
+        }
+
+        .user-info {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #ffc107;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 40px 25px;
+            }
+            h1 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Success Icon -->
+        <div class="success-icon">
+            <svg width="45" height="45" viewBox="0 0 24 24" fill="white">
+                <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+            </svg>
+        </div>
+
+        <!-- Main Heading -->
+        <h1>🎉 You're Registered!</h1>
+        <p class="subtitle">Your spot is reserved for the webinar</p>
+
+        <!-- User Registration Details -->
+        <div class="user-info">
+            <strong>Registration Details:</strong>
+            <div id="userDetails" style="margin-top: 10px;"></div>
+        </div>
+
+        <!-- Webinar Details -->
+        <div class="info-box">
+            <h3>📅 Webinar Details:</h3>
+            <p><strong>Date:</strong> Wednesday, January 29th</p>
+            <p><strong>Time:</strong> 8:00 PM EST</p>
+            <p><strong>Duration:</strong> 90 minutes</p>
+        </div>
+
+        <!-- Next Steps -->
+        <div class="info-box">
+            <h3>✅ Next Steps:</h3>
+            <p>1️⃣ Join our WhatsApp group (click button below)</p>
+            <p>2️⃣ Watch the preparation videos we'll send</p>
+            <p>3️⃣ Show up on Wednesday at 8 PM EST</p>
+        </div>
+
+        <!-- WhatsApp Button (ONLY ONE) -->
+        <a href="https://chat.whatsapp.com/JVc0FHdknBs0rkuXrWZHUn" class="whatsapp-btn" target="_blank">
+            📱 JOIN WHATSAPP GROUP NOW
+        </a>
+
+        <!-- Footer Note -->
+        <p style="margin-top: 20px; color: #999; font-size: 0.9rem;">
+            We'll send you reminders and bonus content via WhatsApp
+        </p>
+    </div>
+
+    <script>
+        // Display user's registration data
+        const registrantData = localStorage.getItem('registrantData');
+        if (registrantData) {
+            const data = JSON.parse(registrantData);
+            document.getElementById('userDetails').innerHTML = `
+                <p>Name: ${data.name}</p>
+                <p>Email: ${data.email}</p>
+                <p>Phone: ${data.phone}</p>
+            `;
+        } else {
+            document.getElementById('userDetails').innerHTML = `
+                <p>Registration saved successfully!</p>
+            `;
+        }
+
+        // Auto-redirect to WhatsApp on mobile after 5 seconds
+        if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+            setTimeout(function() {
+                if (confirm('Ready to join WhatsApp group?')) {
+                    window.location.href = 'https://chat.whatsapp.com/JVc0FHdknBs0rkuXrWZHUn';
+                }
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
